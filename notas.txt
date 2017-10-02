@@ -1,0 +1,19 @@
+Totais do General
+    - dolares 
+    - exercito
+        - infantaria
+        - veiculos
+    - bases
+    - vilarejos
+
+
+
+
+
+Totais Revolução
+    - dolares
+    - pessoas
+    - bases
+    - vilarejos
+
+

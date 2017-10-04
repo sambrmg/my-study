@@ -1,2 +1,2 @@
-# revolution-game
-Revolution Game
+# Study Dashboard
+

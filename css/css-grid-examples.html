@@ -6,14 +6,45 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title></title>
     <style>
-    .grid-container {
-        display: grid;
-        grid-template-columns: 1fr 7fr 1fr;
-        grid-gap: 20px;
-    }
+    
     .grid-container div{
         border: 1px solid black;
     }
+    .grid-container {
+        display: grid;
+        grid-gap: 10px;
+    }
+    
+    .item-1 {
+        grid-column: col 1;
+        grid-row: row 0 /span 2;
+    }
+    
+    .item-2 {
+        grid-column: col 3;
+        grid-row: row 1 /span 2;
+    }
+    
+    .item-3 {
+        grid-column: col 0;
+        grid-row: row 1;
+    }
+    
+    .item-4 {
+        grid-column: col 1 /span 3;
+        grid-row: row 0;
+    }
+    
+    .item-5 {
+        grid-column: col 0;
+        grid-row: row 2;
+    }
+    
+    .item-6 {
+        grid-column: col 1 /span 2;
+        grid-row: row 1;
+    }
+    
     </style>
 </head>
 <body>

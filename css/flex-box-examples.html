@@ -9,24 +9,37 @@
         body{
             margin: 0;
         }
-        .flex-container{
+        nav{
             display: flex;
-            justify-content: flex-end;
+        }
+        nav ul{
             list-style: none;
             margin: 0;
             padding: 0;
+
+            display: flex;
+            flex-flow: row;
         }
-        .flex-container li{
+        nav ul li{
             padding: 20px;
         }
+        
         
     </style>
 </head>
 <body>
-    <ul class="flex-container">
-        <li class="item-1">Home</li>
-        <li class="item-2">FAQ</li>
-        <li class="item-3">Contact</li>
-    </ul>
+    <nav>
+        <div>
+            <svg xmlns="http://www.w3.org/2000/svg" width="50" height="50" viewBox="0 0 8 8">
+                <path d="M4.5 0c-1.21 0-2.27.86-2.5 2-1.1 0-2 .9-2 2s.9 2 2 2h4.5c.83 0 1.5-.67 1.5-1.5 0-.65-.42-1.29-1-1.5v-.5c0-1.38-1.12-2.5-2.5-2.5z" transform="translate(0 1)" />
+            </svg>
+        </div>
+        <ul>
+            <li class="item-1">Home</li>
+            <li class="item-2">FAQ</li>
+            <li class="item-3">Contact</li>
+        </ul>
+    </nav>
+    
 </body>
 </html>

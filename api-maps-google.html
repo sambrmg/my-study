@@ -11,45 +11,55 @@
   <body>
     <div id="map"></div>
     <script>
-      function hSR(results, status){
-        console.log(results);
-      }
-      function pSearch(){
-        var request = {
-          bounds: map.getBounds(),
-          name: "McDonald's"
-        }
-        service.nearbySearch(request, handleSearchResults);
-      }
+      var map;
+      var infowindow;
+
       function initMap(position) {
         var center = {lat: position.coords.latitude, lng: position.coords.longitude};
-        
-        var map = new google.maps.Map(document.getElementById('map'), {
-          zoom: 10,
-          center: center,
-          mapTypeId: google.maps.MapTypeId.ROADMAP
-        });
-       
-        google.maps.event.addListener(map, 'click', function(event) {
-          var marker = new google.maps.Marker({
-            position: event.latLng,
-            map: map
-          });
-          console.log(marker);
-          google.maps.event.addDomListener(marker, 'click', function(e) {
-            console.log(this);
-          });
-        });
-        service = new google.maps.places.PlacesService(map);
 
-        google.maps.event.addListenerOnce(map, "bounds_changed", pSearch);
+        map = new google.maps.Map(document.getElementById('map'), {
+          center: center,
+          zoom: 15
+        });
+
+        infowindow = new google.maps.InfoWindow();
+        var service = new google.maps.places.PlacesService(map);
+        service.nearbySearch({
+          location: center,
+          radius: 500,
+          type: ['store']
+        }, callback);
       }
+
+      function callback(results, status) {
+        if (status === google.maps.places.PlacesServiceStatus.OK) {
+          for (var i = 0; i < results.length; i++) {
+            createMarker(results[i]);
+          }
+        }
+      }
+
+      function createMarker(place) {
+        var placeLoc = place.geometry.location;
+        var marker = new google.maps.Marker({
+          map: map,
+          position: place.geometry.location
+        });
+
+        google.maps.event.addListener(marker, 'click', function() {
+          infowindow.setContent(place.name);
+          infowindow.open(map, this);
+        });
+      }
+
+      
+
       window.onload = function(){
         navigator.geolocation.getCurrentPosition(initMap)
       }
     </script>
     <script async defer
-    src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAZym7_owHRpJ1gYvV9IlT7enwnYgOsuA4">
+    src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAZym7_owHRpJ1gYvV9IlT7enwnYgOsuA4&libraries=places">
     </script>
   </body>
 </html>

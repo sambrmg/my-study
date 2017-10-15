@@ -11,12 +11,23 @@
   <body>
     <div id="map"></div>
     <script>
+      function hSR(results, status){
+        console.log(results);
+      }
+      function pSearch(){
+        var request = {
+          bounds: map.getBounds(),
+          name: "McDonald's"
+        }
+        service.nearbySearch(request, handleSearchResults);
+      }
       function initMap(position) {
         var center = {lat: position.coords.latitude, lng: position.coords.longitude};
         
         var map = new google.maps.Map(document.getElementById('map'), {
           zoom: 10,
-          center: center
+          center: center,
+          mapTypeId: google.maps.MapTypeId.ROADMAP
         });
        
         google.maps.event.addListener(map, 'click', function(event) {
@@ -24,12 +35,14 @@
             position: event.latLng,
             map: map
           });
-
+          console.log(marker);
           google.maps.event.addDomListener(marker, 'click', function(e) {
             console.log(this);
           });
         });
-        
+        service = new google.maps.places.PlacesService(map);
+
+        google.maps.event.addListenerOnce(map, "bounds_changed", pSearch);
       }
       window.onload = function(){
         navigator.geolocation.getCurrentPosition(initMap)

@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Canvas Object Block</title>
+    <script type="application/javascript">
+        
+        var columnWidthObjects = 0;
+        var columnNumberObjects = 0;
+        var columnWidth = 20;
+
+        var canvasArea = {
+            canvas : document.createElement("canvas"),
+            start : function() {
+                    this.canvas.width = 500;
+                    this.canvas.height = 250;
+                    this.context = this.canvas.getContext("2d");
+                    document.body.insertBefore(this.canvas, document.body.childNodes[0]);
+                },
+            clear : function() {
+                this.context.clearRect(0, 0, this.canvas.width, this.canvas.height);
+            }
+        }
+        
+        function objectBlock(height, position, color) {
+            
+            this.height = height;
+            this.color = color;
+            this.update = function() {
+                var ctx = canvasArea.context;
+                ctx.fillStyle = this.color;
+
+                if (columnNumberObjects != 0){
+                    columnWidthObjects = columnWidthObjects + columnWidth + 1;
+                }
+                this.x = columnWidthObjects;
+                columnNumberObjects = columnNumberObjects + 1;
+
+                switch( position ) {
+                    case 'bottom':
+                        this.y = canvasArea.canvas.height - this.height;
+                    break;
+                    case 'left':
+                        
+                    break;
+                    case 'top':
+                    default:
+                        this.y = 0;
+                }
+                ctx.fillRect(this.x, this.y, columnWidth, this.height);
+            }
+        }
+        
+        window.onload = function (){
+            canvasArea.start();
+
+            var column1 = new objectBlock(100 ,'bottom' ,'gray');
+            column1.update();
+
+            var column2 = new objectBlock(80, 'bottom' ,'gray');
+            column2.update();
+
+            var column3 = new objectBlock(120, 'bottom' ,'gray');
+            column3.update();
+
+            var column4 = new objectBlock(40, 'bottom' ,'gray');
+            column4.update();
+
+            var column5 = new objectBlock(25, 'bottom' ,'gray');
+            column5.update();
+
+            var column6 = new objectBlock(65, 'bottom' ,'gray');
+            column6.update();
+
+            var column7 = new objectBlock(35, 'bottom' ,'gray');
+            column7.update();
+        }
+        
+      </script>
+     </head>
+     <body>
+       
+     </body>
+
+</html>

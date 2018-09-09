@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Snake</title>
+    <style>
+        body{
+            height: 100vh;
+            overflow: hidden;
+            margin: 0;
+        }
+        .square{
+            width: 10px;
+            height: 10px;
+            border: 1px solid black;
+            background-color: black;
+            box-sizing: border-box;
+            position: absolute;
+            top: 0;
+            left: 0;
+        }
+    </style>
+</head>
+<body>
+    <script>
+        function SquareObject(){
+            var square = document.createElement("div");
+            square.setAttribute('class', 'square');
+            document.body.appendChild(square);
+
+            var positionTop = 0;
+            var positionLeft = 0;
+            var direction = 'right';
+
+            function goDown(){
+                if(positionTop <= window.innerHeight){
+                    positionTop += 10;
+                }else{
+                    positionTop = 0;
+                }
+            }
+            function goRight(){
+                if(positionLeft <= window.innerWidth){
+                    positionLeft += 10;
+                }else{
+                    positionLeft = 0;
+                }
+            }
+            function goUp(){
+                if(positionTop <= 0){
+                    positionTop = window.innerHeight;
+                }else{
+                    positionTop -= 10;
+                }
+            }
+            function goLeft(){
+                if(positionLeft <= 0){
+                    positionLeft = window.innerWidth;
+                }else{
+                    positionLeft -= 10;
+                }
+            }
+
+            function atualizarFrame(){
+                square.style.top = positionTop + "px"
+                square.style.left = positionLeft + "px"
+            }
+            window.onkeydown = function(evt) {
+                evt = evt || window.event;
+                if( evt.key == "ArrowDown" ){
+                    direction = 'down'
+                }
+                if( evt.key == "ArrowLeft" ){
+                    direction = 'left'
+                }
+                if( evt.key == "ArrowUp" ){
+                    direction = 'up'
+                }
+                if( evt.key == "ArrowRight" ){
+                    direction = 'right'
+                }
+            };
+
+            setInterval(function(){
+                switch (direction) {
+                    case 'right':
+                        goRight();
+                        break;
+                    case 'up':
+                        goUp();
+                        break;
+                    case 'left':
+                        goLeft();
+                        break;
+                    case 'down':
+                        goDown();
+                        break;
+                    default:
+                        break;
+                }
+                atualizarFrame();
+            }, 50)
+        }
+        SquareObject()
+    </script>
+</body>
+</html>
